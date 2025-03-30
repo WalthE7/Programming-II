@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    string filename = "numbers.txt";
+    ifstream inputFile(filename);
+    vector<int> numbers;
+    int num;
+    
+    if (!inputFile) {
+        cerr << "Error: Could not open file." << endl;
+        return 1;
+    }
+    
+    while (inputFile >> num) {
+        numbers.push_back(num);
+    }
+    inputFile.close();
+    
+    if (numbers.size() != 100) {
+        cerr << "Error: File does not contain exactly 100 integers." << endl;
+        return 1;
+    }
+    
+    sort(numbers.begin(), numbers.end());
+    
+    ofstream outputFile(filename);
+    if (!outputFile) {
+        cerr << "Error: Could not open file for writing." << endl;
+        return 1;
+    }
+    
+    for (size_t i = 0; i < numbers.size(); ++i) {
+        outputFile << numbers[i] << (i < numbers.size() - 1 ? " " : "");
+    }
+    outputFile.close();
+    
+    cout << "Numbers sorted and written back to the file successfully." << endl;
+    
+    return 0;
+}
