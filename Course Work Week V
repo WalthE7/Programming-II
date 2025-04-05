@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+template <typename T>
+T findMax(T array[], int size) {
+    T max = array[0];
+    for (int i = 1; i < size; ++i) {
+        if (array[i] > max) {
+            max = array[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    int intArray[] = {1, 5, 3, 9, 2};
+    int intSize = sizeof(intArray) / sizeof(intArray[0]);
+    cout << "Max (int): " << findMax(intArray, intSize) << endl;
+
+    double doubleArray[] = {2.5, 3.7, 1.4, 9.8, 6.6};
+    int doubleSize = sizeof(doubleArray) / sizeof(doubleArray[0]);
+    cout << "Max (double): " << findMax(doubleArray, doubleSize) << endl;
+
+    string stringArray[] = {"Apple", "Orange", "Banana", "Peach"};
+    int stringSize = sizeof(stringArray) / sizeof(stringArray[0]);
+    cout << "Max (string): " << findMax(stringArray, stringSize) << endl;
+
+    return 0;
+}
+
