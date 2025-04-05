@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    string filename;
+    cout << "Enter the file name: ";
+    getline(cin, filename); // Use getline in case of spaces in filename
+
+    ifstream inputFile(filename);
+
+    if (!inputFile) {
+        cerr << "Error opening file: " << filename << endl;
+        return 1;
+    }
+
+    int charCount = 0;
+    char ch;
+    while (inputFile.get(ch)) {
+        charCount++;
+    }
+
+    inputFile.close();
+
+    cout << "Number of characters in the file: " << charCount << endl;
+
+    return 0;
+}
