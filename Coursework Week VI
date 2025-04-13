@@ -6,26 +6,25 @@
 using namespace std;
 
 int hex2Dec(const string& hexString) {
-    int decimal = 0;
+    int decimalValue = 0;
 
     for (char c : hexString) {
         int value;
 
-        if (isdigit(c)) {
+        c = toupper(c);
+
+        if (c >= '0' && c <= '9') {
             value = c - '0';
+        } else if (c >= 'A' && c <= 'F') {
+            value = 10 + (c - 'A');
         } else {
-            c = toupper(c); // Convert to uppercase
-            if (c >= 'A' && c <= 'F') {
-                value = 10 + (c - 'A');
-            } else {
-                throw invalid_argument("Invalid hexadecimal character found.");
-            }
+            throw invalid_argument("Invalid character in hexadecimal string.");
         }
 
-        decimal = decimal * 16 + value;
+        decimalValue = decimalValue * 16 + value;
     }
 
-    return decimal;
+    return decimalValue;
 }
 
 int main() {
@@ -35,11 +34,12 @@ int main() {
     cin >> hexInput;
 
     try {
-        int decimalValue = hex2Dec(hexInput);
-        cout << "Decimal equivalent: " << decimalValue << endl;
+        int decimal = hex2Dec(hexInput);
+        cout << "Decimal value: " << decimal << endl;
     } catch (const invalid_argument& e) {
-        cout << "Error: " << e.what() << endl;
+        cerr << "Error: " << e.what() << endl;
     }
 
     return 0;
 }
+
